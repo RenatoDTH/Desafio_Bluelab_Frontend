@@ -35,6 +35,7 @@
     "react/prop-types": "off",
     "no-unused-expressions": "off",
     "react/require-default-props": "off",
+    "jsx-a11y/label-has-associated-control": "warn",
     "import/extensions": [
       "error",
       "ignorePackages",
