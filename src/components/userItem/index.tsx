@@ -18,10 +18,10 @@ const UserItem: React.FC<IUserItemProps> = ({ user }) => {
     <>
       <Container>
         <strong>
-          {user.firstname} {user.lastname}
+          Nome: {user.firstname} {user.lastname}
         </strong>
-        <strong>{user.phone}</strong>
-        <strong>{user.cpf}</strong>
+        <strong>Telefone: {user.phone}</strong>
+        <strong>CPF: {user.cpf}</strong>
         <button type="button" onClick={handleOpenModal}>
           Mais informações
         </button>

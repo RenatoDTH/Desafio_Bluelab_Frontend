@@ -85,7 +85,7 @@ export const ContentWrap = styled.div`
   grid-template-rows: 1fr;
   gap: 2px 2px;
 
-  @media screen and (max-width: 530px) {
+  @media screen and (max-width: 570px) {
     display: flex;
     flex-direction: column;
   }
