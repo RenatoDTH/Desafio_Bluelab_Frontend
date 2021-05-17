@@ -1,5 +1,12 @@
-import React from 'react';
-import { Button, ContainerContent, Header } from '../../components';
+import React, { useState } from 'react';
+import {
+  Button,
+  ContainerContent,
+  Header,
+  ContentWrap,
+  UserItem,
+} from '../../components';
+import { User } from '../../models';
 
 import {
   Container,
@@ -10,6 +17,8 @@ import {
 } from './styles';
 
 const Home: React.FC = () => {
+  const [users, setUsers] = useState<User[]>([]);
+
   return (
     <>
       <Header />
@@ -22,6 +31,11 @@ const Home: React.FC = () => {
               <InputButton>OK</InputButton>
             </InputContainer>
           </TopContent>
+          <ContentWrap>
+            {users.map((user) => (
+              <UserItem user={user} />
+            ))}
+          </ContentWrap>
         </ContainerContent>
       </Container>
     </>

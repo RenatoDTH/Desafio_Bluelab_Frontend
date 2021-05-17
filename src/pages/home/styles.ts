@@ -70,3 +70,20 @@ export const InputButton = styled.button`
     margin: 2px 2px 2px 0;
   }
 `;
+
+export const Content = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  margin-top: 48px;
+  p {
+    font-size: 28px;
+    line-height: 48px;
+  }
+  @media screen and (max-width: 768px) {
+    p {
+      font-size: 18px;
+      line-height: 24px;
+    }
+  }
+`;
