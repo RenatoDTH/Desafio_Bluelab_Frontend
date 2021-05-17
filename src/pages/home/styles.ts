@@ -1,8 +1,6 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  display: flex;
-
   @media screen and (max-width: 768px) {
     padding: 20px;
     min-height: 100vh;
@@ -76,14 +74,19 @@ export const Content = styled.div`
   flex-direction: column;
   align-self: center;
   margin-top: 48px;
-  p {
-    font-size: 28px;
-    line-height: 48px;
-  }
-  @media screen and (max-width: 768px) {
-    p {
-      font-size: 18px;
-      line-height: 24px;
-    }
+`;
+
+export const ContentWrap = styled.div`
+  align-self: center;
+  margin-top: 48px;
+  justify-content: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr;
+  gap: 2px 2px;
+
+  @media screen and (max-width: 530px) {
+    display: flex;
+    flex-direction: column;
   }
 `;
