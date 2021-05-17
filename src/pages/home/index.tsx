@@ -1,10 +1,17 @@
 import React from 'react';
-import { Header } from '../../components';
+import { ContainerContent, Header } from '../../components';
 
-// import { Container } from './styles';
+import { Container } from './styles';
 
 const Home: React.FC = () => {
-  return <Header />;
+  return (
+    <>
+      <Header />
+      <Container>
+        <ContainerContent />
+      </Container>
+    </>
+  );
 };
 
 export default Home;

@@ -3,13 +3,14 @@ import styled from 'styled-components';
 export const Container = styled.header`
   display: flex;
   flex-direction: column;
-  background-color: #f8f8f8;
+  background-color: #f5f5f5;
   align-items: center;
+  padding-top: 10px;
 `;
 
 export const NavBar = styled.nav`
   width: 100%;
-  background: #f8f8f8;
+  background: #f5f5f5;
   position: sticky;
   margin-top: 20px;
   top: 0;
