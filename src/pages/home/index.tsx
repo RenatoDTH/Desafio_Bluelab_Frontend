@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { FormEvent, useEffect, useState } from 'react';
 import { Button, ContainerContent, Header, UserItem } from '../../components';
 import { User } from '../../models';
 import api from '../../services/api';
@@ -14,6 +14,9 @@ import {
 
 const Home: React.FC = () => {
   const [users, setUsers] = useState<User[]>([]);
+  const [searchValue, setSearchValue] = useState<string>('');
+  const [allUsers, setAllUsers] = useState<boolean>(true);
+  const [oneUser, setOneUser] = useState<User[]>([]);
 
   useEffect(() => {
     setTimeout(() => {
@@ -23,23 +26,49 @@ const Home: React.FC = () => {
     }, 1 * 500);
   }, []);
 
+  const handleSearchUser = (e: FormEvent) => {
+    e.preventDefault();
+    setAllUsers(false);
+
+    const userFound = users.filter((user) => user.cpf === searchValue);
+
+    if (userFound.length === 0) {
+      console.log('Informações de CPF não armazenadas.');
+    }
+    setOneUser(userFound);
+  };
+
+  const handleAllUsers = (e: FormEvent) => {
+    e.preventDefault();
+    setAllUsers(true);
+  };
+
   return (
     <>
       <Header />
       <Container>
         <ContainerContent>
-          <TopContent>
-            <Button>Todos</Button>
+          <TopContent onSubmit={handleSearchUser}>
+            <Button onClick={handleAllUsers}>Todos</Button>
             <InputContainer>
-              <Input placeholder="Pesquise por CPF" />
-              <InputButton>OK</InputButton>
+              <Input
+                placeholder="Pesquise por CPF"
+                onChange={(e) => {
+                  setSearchValue(e.target.value);
+                }}
+              />
+              <InputButton type="submit">OK</InputButton>
             </InputContainer>
           </TopContent>
 
           <ContentWrap>
-            {users.map((user: User) => (
-              <UserItem key={user.id} user={user} />
-            ))}
+            {allUsers
+              ? users.map((user: User) => (
+                  <UserItem key={user.id} user={user} />
+                ))
+              : oneUser.map((user: User) => (
+                  <UserItem key={user.id} user={user} />
+                ))}
           </ContentWrap>
         </ContainerContent>
       </Container>

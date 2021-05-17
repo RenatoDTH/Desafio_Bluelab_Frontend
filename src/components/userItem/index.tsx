@@ -5,11 +5,11 @@ import 'react-responsive-modal/styles.css';
 
 import { Container, ModalContent } from './styles';
 
-export interface IUserItemProps {
+export interface UserItemProps {
   user: User;
 }
 
-const UserItem: React.FC<IUserItemProps> = ({ user }) => {
+const UserItem: React.FC<UserItemProps> = ({ user }) => {
   const [open, setOpen] = useState(false);
   const handleOpenModal = () => setOpen(true);
   const handleCloseModal = () => setOpen(false);
