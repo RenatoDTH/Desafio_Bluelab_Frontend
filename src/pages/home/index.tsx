@@ -1,4 +1,4 @@
-import React, { FormEvent, useEffect, useState } from 'react';
+import React, { FormEvent, useCallback, useEffect, useState } from 'react';
 import { Button, ContainerContent, Header, UserItem } from '../../components';
 import { User } from '../../models';
 import api from '../../services/api';
@@ -24,7 +24,7 @@ const Home: React.FC = () => {
         setUsers(response.data);
       });
     }, 1 * 500);
-  }, []);
+  }, [users]);
 
   const handleSearchUser = (e: FormEvent) => {
     e.preventDefault();
