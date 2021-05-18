@@ -3,6 +3,7 @@ import { toast } from 'react-toastify';
 import { Button, ContainerContent, Header, UserItem } from '../../components';
 import { User } from '../../models';
 import api from '../../services/api';
+import { formatCpf, formatDate, formatPhone } from '../../utils';
 
 import {
   Container,
@@ -21,10 +22,19 @@ const Home: React.FC = () => {
   const [oneUser, setOneUser] = useState<User[]>([]);
 
   useEffect(() => {
-    setTimeout(() => {
-      api.get('users').then((response) => {
-        setUsers(response.data);
+    setTimeout(async () => {
+      const response = await api.get<User[]>('users');
+
+      const responseFormatted = response.data.map((user) => {
+        return {
+          ...user,
+          cpfFormatted: formatCpf(user.cpf),
+          phoneFormatted: formatPhone(user.phone),
+          created_atFormatted: formatDate(user.created_at),
+          updated_atFormatted: formatDate(user.updated_at),
+        };
       });
+      setUsers(responseFormatted);
     }, 1 * 500);
   }, [users]);
 

@@ -81,3 +81,7 @@ export const ButtonPhone = styled(Button)`
     border: none;
   }
 `;
+
+export const Label = styled.label`
+  color: #00a0ef;
+`;

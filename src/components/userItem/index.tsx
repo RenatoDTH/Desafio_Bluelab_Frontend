@@ -13,6 +13,7 @@ import {
   FormPhone,
   InputPhone,
   ButtonPhone,
+  Label,
 } from './styles';
 import api from '../../services/api';
 
@@ -59,10 +60,10 @@ const UserItem: React.FC<UserItemProps> = ({ user }) => {
     <>
       <Container>
         <strong>
-          Nome: {user.firstname} {user.lastname}
+          {user.firstname} {user.lastname}
         </strong>
-        <strong>Telefone: {user.phone}</strong>
-        <strong>CPF: {user.cpf}</strong>
+        <p>Telefone: {user.phoneFormatted}</p>
+        <p>CPF: {user.cpfFormatted}</p>
         <button type="button" onClick={handleOpenModal}>
           Mais informações
         </button>
@@ -77,10 +78,10 @@ const UserItem: React.FC<UserItemProps> = ({ user }) => {
             <p>
               {user.firstname} {user.lastname}
             </p>
-            <p>Telefone: {user.phone}</p>
-            <p>CPF: {user.cpf}</p>
-            <p>Criado em: {user.created_at}</p>
-            <p>Editado em: {user.updated_at}</p>
+            <p>Telefone: {user.phoneFormatted}</p>
+            <p>CPF: {user.cpfFormatted}</p>
+            <p>Criado em: {user.created_atFormatted}</p>
+            <p>Editado em: {user.updated_atFormatted}</p>
             <EditButton onClick={handleOpenEditModal}>Editar</EditButton>
             <DeleteButton onClick={deleteItem}>Excluir</DeleteButton>
           </ModalContent>
@@ -98,8 +99,10 @@ const UserItem: React.FC<UserItemProps> = ({ user }) => {
               {user.firstname} {user.lastname}
             </p>
             <FormPhone onSubmit={handleChangePhone}>
+              <Label htmlFor="phone">Telefone Novo</Label>
               <InputPhone
-                placeholder="Telefone novo"
+                name="phone"
+                placeholder="Ex: 11222224444"
                 onChange={(e) => setNewPhone(e.target.value)}
               />
               <ButtonPhone type="submit">Alterar</ButtonPhone>
