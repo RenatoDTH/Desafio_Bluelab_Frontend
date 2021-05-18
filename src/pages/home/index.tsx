@@ -1,4 +1,5 @@
 import React, { FormEvent, useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 import { Button, ContainerContent, Header, UserItem } from '../../components';
 import { User } from '../../models';
 import api from '../../services/api';
@@ -33,7 +34,7 @@ const Home: React.FC = () => {
     const userFound = users.filter((user) => user.cpf === searchValue);
 
     if (userFound.length === 0) {
-      console.log('Informações de CPF não armazenadas.');
+      throw toast.error('Informações de CPF não armazenadas.');
     }
     setOneUser(userFound);
   };

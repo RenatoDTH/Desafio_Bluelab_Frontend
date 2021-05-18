@@ -72,8 +72,6 @@ const UserCreation: React.FC = () => {
       } catch (err) {
         throw toast.error(err.message);
       }
-
-      console.log(data);
     },
     [firstName, lastName, phone, cpf, users],
   );

@@ -1,5 +1,6 @@
 import React, { FormEvent, useState } from 'react';
 import { Modal } from 'react-responsive-modal';
+import { toast } from 'react-toastify';
 import { validatePhone } from 'validations-br';
 import { User } from '../../models';
 import 'react-responsive-modal/styles.css';
@@ -33,21 +34,22 @@ const UserItem: React.FC<UserItemProps> = ({ user }) => {
     try {
       await api.delete(`users/${user.id}`);
     } catch (err) {
-      console.log(err);
+      throw toast.error('Erro ao tentar deletar o usuário!');
     }
     document.location.reload(true);
   };
 
-  const handleChangePhone = (e: FormEvent) => {
+  const handleChangePhone = async (e: FormEvent) => {
     e.preventDefault();
     const isValid = validatePhone(newPhone);
 
     if (!isValid) {
-      console.log('Telefone Inválido');
+      throw toast.error('Telefone Inválido');
     } else {
-      api.put(`users/${user.id}`, {
+      await api.put(`users/${user.id}`, {
         phone: newPhone,
       });
+      toast.success('Telefone alterado com sucesso!');
     }
 
     document.location.reload(true);
