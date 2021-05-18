@@ -115,17 +115,6 @@ describe('Home', () => {
     expect(screen.getByText('any_name2 any_lastname2')).toBeTruthy();
   });
 
-  it('should go to userCreation page', () => {
-    render(
-      <BrowserRouter>
-        <Home />
-      </BrowserRouter>,
-    );
-
-    fireEvent.click(screen.getByTestId('userCreationButton'));
-    expect(global.window.location.pathname).toEqual('/usercreation');
-  });
-
   it('should be open modals correctly', async () => {
     apiMock.onGet('users').reply(200, [
       {
@@ -156,5 +145,91 @@ describe('Home', () => {
     expect(screen.getByTestId('delete-1')).toBeTruthy();
     fireEvent.click(screen.getByTestId('edit-1'));
     expect(screen.getByTestId('editButton-1')).toBeTruthy();
+  });
+
+  it('should be able to update', async () => {
+    apiMock.onGet('users').reply(200, [
+      {
+        id: '1',
+        firstname: 'any_name',
+        lastname: 'any_lastname',
+        phone: '1130222530',
+        cpf: '25014966047',
+        updated_at: '2021-05-17T21:08:02.000Z',
+        created_at: '2021-05-17T20:01:25.000Z',
+      },
+    ]);
+
+    render(
+      <BrowserRouter>
+        <Home />
+      </BrowserRouter>,
+    );
+
+    await waitFor(
+      () => expect(screen.getByText('any_name any_lastname')).toBeTruthy(),
+      {
+        timeout: 2501,
+      },
+    );
+    fireEvent.click(screen.getByTestId('moreInfo-1'));
+    expect(screen.getByTestId('edit-1')).toBeTruthy();
+    expect(screen.getByTestId('delete-1')).toBeTruthy();
+    fireEvent.click(screen.getByTestId('edit-1'));
+    expect(screen.getByTestId('editButton-1')).toBeTruthy();
+    const inputPhone = screen.getByPlaceholderText(
+      'Ex: 11222224444',
+    ) as HTMLInputElement;
+    fireEvent.change(inputPhone, { target: { value: '11945009190' } });
+    expect(inputPhone.value).toBe('11945009190');
+    fireEvent.click(screen.getByTestId('editButton-1'));
+    apiMock.onPut('users/1').reply(200, {
+      phone: '11945009190',
+    });
+    expect(global.window.location.pathname).toEqual('/');
+  });
+
+  it('should be able to delete', async () => {
+    apiMock.onGet('users').reply(200, [
+      {
+        id: '1',
+        firstname: 'any_name',
+        lastname: 'any_lastname',
+        phone: '1130222530',
+        cpf: '25014966047',
+        updated_at: '2021-05-17T21:08:02.000Z',
+        created_at: '2021-05-17T20:01:25.000Z',
+      },
+    ]);
+
+    render(
+      <BrowserRouter>
+        <Home />
+      </BrowserRouter>,
+    );
+
+    await waitFor(
+      () => expect(screen.getByText('any_name any_lastname')).toBeTruthy(),
+      {
+        timeout: 2501,
+      },
+    );
+    fireEvent.click(screen.getByTestId('moreInfo-1'));
+    expect(screen.getByTestId('edit-1')).toBeTruthy();
+    expect(screen.getByTestId('delete-1')).toBeTruthy();
+    fireEvent.click(screen.getByTestId('delete-1'));
+    apiMock.onDelete('users/1').reply(204);
+    expect(global.window.location.pathname).toEqual('/');
+  });
+
+  it('should go to userCreation page', () => {
+    render(
+      <BrowserRouter>
+        <Home />
+      </BrowserRouter>,
+    );
+
+    fireEvent.click(screen.getByTestId('userCreationButton'));
+    expect(global.window.location.pathname).toEqual('/usercreation');
   });
 });
