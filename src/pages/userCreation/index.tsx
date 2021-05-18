@@ -72,6 +72,10 @@ const UserCreation: React.FC = () => {
       } catch (err) {
         throw toast.error(err.message);
       }
+      setFirstName('');
+      setLastName('');
+      setPhone('');
+      setCpf('');
     },
     [firstName, lastName, phone, cpf, users],
   );
@@ -80,32 +84,42 @@ const UserCreation: React.FC = () => {
       <Header />
       <Container>
         <ContainerContent>
-          <FormCreateUser onSubmit={handleCreateUser}>
+          <FormCreateUser data-testid="createForm" onSubmit={handleCreateUser}>
             <Label htmlFor="firstname">Nome</Label>
             <Input
+              data-testid="inputName"
+              value={firstName}
               name="firstname"
               placeholder="Nome (ex: Renato)"
               onChange={(e) => setFirstName(e.target.value)}
             />
             <Label htmlFor="lastname">Sobrenome</Label>
             <Input
+              data-testid="inputLastName"
+              value={lastName}
               name="lastname"
               placeholder="Sobrenome (ex: Castro)"
               onChange={(e) => setLastName(e.target.value)}
             />
             <Label htmlFor="phone">Telefone</Label>
             <Input
+              data-testid="inputPhone"
+              value={phone}
               name="phone"
               placeholder="Telefone (ex: 11222223333)"
               onChange={(e) => setPhone(e.target.value)}
             />
             <Label htmlFor="cpf">CPF</Label>
             <Input
+              data-testid="inputCpf"
+              value={cpf}
               name="cpf"
               placeholder="CPF (ex: 11122233344)"
               onChange={(e) => setCpf(e.target.value)}
             />
-            <ButtonSubmit type="submit">Cadastrar</ButtonSubmit>
+            <ButtonSubmit data-testid="createUser" type="submit">
+              Cadastrar
+            </ButtonSubmit>
           </FormCreateUser>
         </ContainerContent>
       </Container>

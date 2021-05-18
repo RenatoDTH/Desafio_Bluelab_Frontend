@@ -14,10 +14,10 @@ const Header: React.FC = () => {
         <input type="checkbox" id="hamburgerMenu" />
 
         <div id="items">
-          <Link to="/">
+          <Link data-testid="homeButton" to="/">
             <span>Home</span>
           </Link>
-          <Link to="/usercreation">
+          <Link data-testid="userCreationButton" to="/usercreation">
             <span>Criação de Usuário</span>
           </Link>
         </div>

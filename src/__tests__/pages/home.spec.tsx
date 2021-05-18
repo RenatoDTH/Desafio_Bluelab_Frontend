@@ -1,8 +1,7 @@
 import React from 'react';
-import { fireEvent, render, waitFor } from '@testing-library/react';
+import { fireEvent, render, waitFor, screen } from '@testing-library/react';
 import AxiosMock from 'axios-mock-adapter';
 import { BrowserRouter } from 'react-router-dom';
-import { ToastContainer } from 'react-toastify';
 import { act } from 'react-dom/test-utils';
 import api from '../../services/api';
 import { Home } from '../../pages';
@@ -11,14 +10,14 @@ const apiMock = new AxiosMock(api);
 
 describe('Home', () => {
   it('should render static componenets', () => {
-    const { getByTestId } = render(
+    render(
       <BrowserRouter>
         <Home />
       </BrowserRouter>,
     );
-    expect(getByTestId('header')).toBeTruthy();
-    expect(getByTestId('topContent')).toBeTruthy();
-    expect(getByTestId('loading')).toBeTruthy();
+    expect(screen.getByTestId('header')).toBeTruthy();
+    expect(screen.getByTestId('topContent')).toBeTruthy();
+    expect(screen.getByTestId('loading')).toBeTruthy();
   });
 
   it('should be able to list all users from the api', async () => {
@@ -94,7 +93,7 @@ describe('Home', () => {
       },
     );
 
-    const searchInput = getByTestId('searchInput');
+    const searchInput = getByTestId('searchInput') as HTMLInputElement;
 
     await act(async () => {
       fireEvent.change(searchInput, {
@@ -113,44 +112,17 @@ describe('Home', () => {
         timeout: 2550,
       },
     );
-    expect(getByText('any_name2 any_lastname2')).toBeTruthy();
+    expect(screen.getByText('any_name2 any_lastname2')).toBeTruthy();
   });
 
-  // it('should be able to delete a user', async () => {
-  //   apiMock.onGet('users').reply(200, [
-  //     {
-  //       id: '1',
-  //       firstname: 'any_name',
-  //       lastname: 'any_lastname',
-  //       phone: '1130222530',
-  //       cpf: '25014966047',
-  //       updated_at: '2021-05-17T21:08:02.000Z',
-  //       created_at: '2021-05-17T20:01:25.000Z',
-  //     },
-  //   ]);
+  it('should go to userCreation page', () => {
+    render(
+      <BrowserRouter>
+        <Home />
+      </BrowserRouter>,
+    );
 
-  //   apiMock.onDelete('users/1').reply(200, 'Usuário deletado com sucesso');
-
-  //   const { getByText, getByTestId } = render(
-  //     <BrowserRouter>
-  //       <Home />
-  //     </BrowserRouter>,
-  //   );
-
-  //   await waitFor(
-  //     () => expect(getByText('any_name any_lastname')).toBeTruthy(),
-  //     {
-  //       timeout: 2501,
-  //     },
-  //   );
-
-  //   await act(async () => {
-  //     fireEvent.click(getByTestId('moreInfo-1'));
-  //   });
-
-  //   const a = await act(async () => {
-  //     fireEvent.click(getByTestId('delete-1'));
-  //   });
-
-  // });
+    fireEvent.click(screen.getByTestId('userCreationButton'));
+    expect(global.window.location.pathname).toEqual('/usercreation');
+  });
 });
