@@ -7,7 +7,7 @@ import { Container, NavBar } from './styles';
 
 const Header: React.FC = () => {
   return (
-    <Container>
+    <Container data-testid="header">
       <Logo />
       <NavBar>
         <label htmlFor="hamburgerMenu">&#9776;</label>

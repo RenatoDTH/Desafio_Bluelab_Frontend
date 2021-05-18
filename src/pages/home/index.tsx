@@ -68,16 +68,17 @@ const Home: React.FC = () => {
       <Header />
       <Container>
         <ContainerContent>
-          <TopContent onSubmit={handleSearchUser}>
+          <TopContent onSubmit={handleSearchUser} data-testid="topContent">
             <Button onClick={handleAllUsers}>Todos</Button>
             <InputContainer>
               <Input
+                data-testid="searchInput"
                 placeholder="Pesquise por CPF"
                 onChange={(e) => {
                   setSearchValue(e.target.value);
                 }}
               />
-              <InputButton type="submit">
+              <InputButton data-testid="searchButton" type="submit">
                 <SearchIcon />
               </InputButton>
             </InputContainer>
@@ -86,7 +87,7 @@ const Home: React.FC = () => {
           {isLoading ? (
             <LoadAnimation />
           ) : (
-            <ContentWrap>
+            <ContentWrap data-testid="userList">
               {allUsers
                 ? users.map((user: User) => (
                     <UserItem key={user.id} user={user} />

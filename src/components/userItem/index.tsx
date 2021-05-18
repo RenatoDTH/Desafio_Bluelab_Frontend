@@ -64,7 +64,11 @@ const UserItem: React.FC<UserItemProps> = ({ user }) => {
         </strong>
         <p>Telefone: {user.phoneFormatted}</p>
         <p>CPF: {user.cpfFormatted}</p>
-        <button type="button" onClick={handleOpenModal}>
+        <button
+          data-testid={`moreInfo-${user.id}`}
+          type="button"
+          onClick={handleOpenModal}
+        >
           Mais informações
         </button>
         <Modal
@@ -83,7 +87,12 @@ const UserItem: React.FC<UserItemProps> = ({ user }) => {
             <p>Criado em: {user.created_atFormatted}</p>
             <p>Editado em: {user.updated_atFormatted}</p>
             <EditButton onClick={handleOpenEditModal}>Editar</EditButton>
-            <DeleteButton onClick={deleteItem}>Excluir</DeleteButton>
+            <DeleteButton
+              data-testid={`delete-${user.id}`}
+              onClick={deleteItem}
+            >
+              Excluir
+            </DeleteButton>
           </ModalContent>
         </Modal>
 

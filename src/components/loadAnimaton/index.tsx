@@ -14,7 +14,7 @@ const LoadAnimation: React.FC = () => {
   };
 
   return (
-    <Container>
+    <Container data-testid="loading">
       <Lottie options={defaultOptions} height={400} width={400} />
     </Container>
   );

@@ -55,6 +55,7 @@
     "@types/styled-components": "^5.1.9",
     "@typescript-eslint/eslint-plugin": "^4.23.0",
     "@typescript-eslint/parser": "^4.23.0",
+    "axios-mock-adapter": "^1.19.0",
     "eslint": "^7.26.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-config-prettier": "^8.3.0",
@@ -66,6 +67,7 @@
     "eslint-plugin-react-hooks": "4",
     "git-commit-msg-linter": "^3.1.0",
     "husky": "^6.0.0",
+    "jest-canvas-mock": "^2.3.1",
     "lint-staged": "^11.0.0",
     "prettier": "^2.3.0"
   }
