@@ -86,7 +86,12 @@ const UserItem: React.FC<UserItemProps> = ({ user }) => {
             <p>CPF: {user.cpfFormatted}</p>
             <p>Criado em: {user.created_atFormatted}</p>
             <p>Editado em: {user.updated_atFormatted}</p>
-            <EditButton onClick={handleOpenEditModal}>Editar</EditButton>
+            <EditButton
+              data-testid={`edit-${user.id}`}
+              onClick={handleOpenEditModal}
+            >
+              Editar
+            </EditButton>
             <DeleteButton
               data-testid={`delete-${user.id}`}
               onClick={deleteItem}
@@ -114,7 +119,9 @@ const UserItem: React.FC<UserItemProps> = ({ user }) => {
                 placeholder="Ex: 11222224444"
                 onChange={(e) => setNewPhone(e.target.value)}
               />
-              <ButtonPhone type="submit">Alterar</ButtonPhone>
+              <ButtonPhone data-testid={`editButton-${user.id}`} type="submit">
+                Alterar
+              </ButtonPhone>
             </FormPhone>
           </ModalContent>
         </Modal>

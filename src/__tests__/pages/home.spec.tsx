@@ -42,20 +42,20 @@ describe('Home', () => {
       },
     ]);
 
-    const { getByText } = render(
+    render(
       <BrowserRouter>
         <Home />
       </BrowserRouter>,
     );
 
     await waitFor(
-      () => expect(getByText('any_name any_lastname')).toBeTruthy(),
+      () => expect(screen.getByText('any_name any_lastname')).toBeTruthy(),
       {
         timeout: 2501,
       },
     );
-    expect(getByText('Telefone: (11) 30222-530'));
-    expect(getByText('CPF: 184.060.970-27'));
+    expect(screen.getByText('Telefone: (11) 30222-530'));
+    expect(screen.getByText('CPF: 184.060.970-27'));
   });
 
   it('should be able to find a user by cpf', async () => {
@@ -124,5 +124,37 @@ describe('Home', () => {
 
     fireEvent.click(screen.getByTestId('userCreationButton'));
     expect(global.window.location.pathname).toEqual('/usercreation');
+  });
+
+  it('should be open modals correctly', async () => {
+    apiMock.onGet('users').reply(200, [
+      {
+        id: '1',
+        firstname: 'any_name',
+        lastname: 'any_lastname',
+        phone: '1130222530',
+        cpf: '25014966047',
+        updated_at: '2021-05-17T21:08:02.000Z',
+        created_at: '2021-05-17T20:01:25.000Z',
+      },
+    ]);
+
+    render(
+      <BrowserRouter>
+        <Home />
+      </BrowserRouter>,
+    );
+
+    await waitFor(
+      () => expect(screen.getByText('any_name any_lastname')).toBeTruthy(),
+      {
+        timeout: 2501,
+      },
+    );
+    fireEvent.click(screen.getByTestId('moreInfo-1'));
+    expect(screen.getByTestId('edit-1')).toBeTruthy();
+    expect(screen.getByTestId('delete-1')).toBeTruthy();
+    fireEvent.click(screen.getByTestId('edit-1'));
+    expect(screen.getByTestId('editButton-1')).toBeTruthy();
   });
 });
