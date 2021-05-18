@@ -1,6 +1,12 @@
 import React, { FormEvent, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
-import { Button, ContainerContent, Header, UserItem } from '../../components';
+import {
+  Button,
+  ContainerContent,
+  Header,
+  UserItem,
+  LoadAnimation,
+} from '../../components';
 import { User } from '../../models';
 import api from '../../services/api';
 import { formatCpf, formatDate, formatPhone } from '../../utils';
@@ -20,6 +26,7 @@ const Home: React.FC = () => {
   const [searchValue, setSearchValue] = useState<string>('');
   const [allUsers, setAllUsers] = useState<boolean>(true);
   const [oneUser, setOneUser] = useState<User[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     setTimeout(async () => {
@@ -35,7 +42,8 @@ const Home: React.FC = () => {
         };
       });
       setUsers(responseFormatted);
-    }, 1 * 500);
+      setIsLoading(false);
+    }, 1 * 2500);
   }, [users]);
 
   const handleSearchUser = (e: FormEvent) => {
@@ -75,15 +83,19 @@ const Home: React.FC = () => {
             </InputContainer>
           </TopContent>
 
-          <ContentWrap>
-            {allUsers
-              ? users.map((user: User) => (
-                  <UserItem key={user.id} user={user} />
-                ))
-              : oneUser.map((user: User) => (
-                  <UserItem key={user.id} user={user} />
-                ))}
-          </ContentWrap>
+          {isLoading ? (
+            <LoadAnimation />
+          ) : (
+            <ContentWrap>
+              {allUsers
+                ? users.map((user: User) => (
+                    <UserItem key={user.id} user={user} />
+                  ))
+                : oneUser.map((user: User) => (
+                    <UserItem key={user.id} user={user} />
+                  ))}
+            </ContentWrap>
+          )}
         </ContainerContent>
       </Container>
     </>

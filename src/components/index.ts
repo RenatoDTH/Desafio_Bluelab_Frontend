@@ -4,3 +4,4 @@ export { default as ContainerContent } from './containerContent';
 export { default as Button } from './button';
 export { default as ContentWrap } from './containerContent';
 export { default as UserItem } from './userItem';
+export { default as LoadAnimation } from './loadAnimaton';
