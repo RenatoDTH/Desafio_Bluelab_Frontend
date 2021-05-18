@@ -1,4 +1,4 @@
-import React, { FormEvent, useCallback, useEffect, useState } from 'react';
+import React, { FormEvent, useEffect, useState } from 'react';
 import { Button, ContainerContent, Header, UserItem } from '../../components';
 import { User } from '../../models';
 import api from '../../services/api';

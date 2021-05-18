@@ -17,7 +17,7 @@ const Header: React.FC = () => {
           <Link to="/">
             <span>Home</span>
           </Link>
-          <Link to="/createuser">
+          <Link to="/usercreation">
             <span>Criação de Usuário</span>
           </Link>
         </div>
