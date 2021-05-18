@@ -11,6 +11,7 @@ import {
   InputContainer,
   InputButton,
   ContentWrap,
+  SearchIcon,
 } from './styles';
 
 const Home: React.FC = () => {
@@ -58,7 +59,9 @@ const Home: React.FC = () => {
                   setSearchValue(e.target.value);
                 }}
               />
-              <InputButton type="submit">OK</InputButton>
+              <InputButton type="submit">
+                <SearchIcon />
+              </InputButton>
             </InputContainer>
           </TopContent>
 

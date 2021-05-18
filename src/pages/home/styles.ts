@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { ImSearch } from 'react-icons/im';
 
 export const Container = styled.div`
   @media screen and (max-width: 768px) {
@@ -88,5 +89,18 @@ export const ContentWrap = styled.div`
   @media screen and (max-width: 570px) {
     display: flex;
     flex-direction: column;
+  }
+`;
+
+export const SearchIcon = styled(ImSearch)`
+  font-size: 15px;
+  color: #f5f5f5;
+
+  @media screen and (max-width: 770px) {
+    font-size: 11px;
+  }
+
+  @media screen and (max-width: 450px) {
+    font-size: 10px;
   }
 `;
