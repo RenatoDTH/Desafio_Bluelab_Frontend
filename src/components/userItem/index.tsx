@@ -34,10 +34,11 @@ const UserItem: React.FC<UserItemProps> = ({ user }) => {
   const deleteItem = async (): Promise<void> => {
     try {
       await api.delete(`users/${user.id}`);
+      toast.success('Usuário deletado com sucesso!');
     } catch (err) {
       throw toast.error('Erro ao tentar deletar o usuário!');
     }
-    document.location.reload(true);
+    setOpen(false);
   };
 
   const handleChangePhone = async (e: FormEvent) => {
@@ -53,7 +54,7 @@ const UserItem: React.FC<UserItemProps> = ({ user }) => {
       toast.success('Telefone alterado com sucesso!');
     }
 
-    document.location.reload(true);
+    setOpenEdit(false);
   };
 
   return (

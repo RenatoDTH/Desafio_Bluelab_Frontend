@@ -186,7 +186,7 @@ describe('Home', () => {
     apiMock.onPut('users/1').reply(200, {
       phone: '11945009190',
     });
-    expect(global.window.location.pathname).toEqual('/');
+    expect(screen.getByTestId('editButton-1')).toBeTruthy();
   });
 
   it('should be able to delete', async () => {
@@ -219,7 +219,7 @@ describe('Home', () => {
     expect(screen.getByTestId('delete-1')).toBeTruthy();
     fireEvent.click(screen.getByTestId('delete-1'));
     apiMock.onDelete('users/1').reply(204);
-    expect(global.window.location.pathname).toEqual('/');
+    expect(screen.getByTestId('topContent')).toBeTruthy();
   });
 
   it('should go to userCreation page', () => {

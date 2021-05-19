@@ -1,4 +1,4 @@
-import React, { FormEvent, useEffect, useState } from 'react';
+import React, { FormEvent, useCallback, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import {
   Button,
@@ -47,17 +47,22 @@ const Home: React.FC = () => {
     }, 1 * 2500);
   }, [users]);
 
-  const handleSearchUser = (e: FormEvent) => {
-    e.preventDefault();
-    setAllUsers(false);
+  const handleSearchUser = useCallback(
+    async (e: FormEvent) => {
+      e.preventDefault();
+      setAllUsers(false);
 
-    const userFound = users.filter((user) => user.cpf === searchValue);
+      const userFound = await users.filter((user) => user.cpf === searchValue);
 
-    if (userFound.length === 0) {
-      throw toast.error('Informações de CPF não armazenadas.');
-    }
-    setOneUser(userFound);
-  };
+      if (userFound.length === 0) {
+        throw toast.error('Informações de CPF não armazenadas.');
+      }
+
+      setOneUser(userFound);
+      setSearchValue('');
+    },
+    [searchValue, users],
+  );
 
   const handleAllUsers = (e: FormEvent) => {
     e.preventDefault();
@@ -74,6 +79,7 @@ const Home: React.FC = () => {
             <InputContainer>
               <Input
                 data-testid="searchInput"
+                value={searchValue}
                 placeholder="CPF (ex: 11122233344)"
                 onChange={(e) => {
                   setSearchValue(e.target.value);

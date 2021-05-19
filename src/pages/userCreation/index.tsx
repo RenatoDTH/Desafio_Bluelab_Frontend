@@ -40,8 +40,13 @@ const UserCreation: React.FC = () => {
       const schema = Yup.object().shape({
         firstname: Yup.string().required('Nome obrigatório'),
         lastname: Yup.string().required('Sobreneme obrigatório'),
-        cpf: Yup.string().required('CPF obrigatório'),
-        phone: Yup.string().required('Telefone obrigatório'),
+        cpf: Yup.string()
+          .required('CPF obrigatório')
+          .length(11, 'CPF só deve conter dígitos'),
+        phone: Yup.string()
+          .required('Telefone obrigatório!')
+          .min(10, 'Telefone só deve conter dígitos')
+          .max(11, 'Telefone só deve conter dígitos'),
       });
 
       try {
