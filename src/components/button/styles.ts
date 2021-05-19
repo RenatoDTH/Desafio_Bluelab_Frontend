@@ -17,11 +17,11 @@ export const Container = styled.button`
   }
   @media screen and (max-width: 768px) {
     font-size: 12px;
-    font-weight: 400;
+    font-weight: 500;
   }
   @media screen and (max-width: 450px) {
-    font-size: 10px;
-    font-weight: 400;
+    font-size: 12px;
+    font-weight: 500;
     margin: 2px;
   }
 `;

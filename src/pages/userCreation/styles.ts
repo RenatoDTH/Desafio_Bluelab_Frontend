@@ -14,6 +14,12 @@ export const FormCreateUser = styled.form`
   justify-content: center;
   align-items: center;
   min-width: 100%;
+
+  @media screen and (max-width: 350px) {
+    width: 100%;
+    padding: 20px;
+    min-height: 100vh;
+  }
 `;
 
 export const Input = styled.input`
