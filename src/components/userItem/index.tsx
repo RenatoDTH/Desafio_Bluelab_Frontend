@@ -14,6 +14,7 @@ import {
   InputPhone,
   ButtonPhone,
   Label,
+  ButtonContainer,
 } from './styles';
 import api from '../../services/api';
 
@@ -87,18 +88,20 @@ const UserItem: React.FC<UserItemProps> = ({ user }) => {
             <p>CPF: {user.cpfFormatted}</p>
             <p>Criado em: {user.created_atFormatted}</p>
             <p>Editado em: {user.updated_atFormatted}</p>
-            <EditButton
-              data-testid={`edit-${user.id}`}
-              onClick={handleOpenEditModal}
-            >
-              Editar
-            </EditButton>
-            <DeleteButton
-              data-testid={`delete-${user.id}`}
-              onClick={deleteItem}
-            >
-              Excluir
-            </DeleteButton>
+            <ButtonContainer>
+              <EditButton
+                data-testid={`edit-${user.id}`}
+                onClick={handleOpenEditModal}
+              >
+                Editar
+              </EditButton>
+              <DeleteButton
+                data-testid={`delete-${user.id}`}
+                onClick={deleteItem}
+              >
+                Excluir
+              </DeleteButton>
+            </ButtonContainer>
           </ModalContent>
         </Modal>
 

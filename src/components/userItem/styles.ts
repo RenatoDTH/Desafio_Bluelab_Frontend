@@ -41,6 +41,19 @@ export const ModalContent = styled.div`
   }
 `;
 
+export const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-content: center;
+
+  @media screen and (max-width: 520px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+`;
+
 export const EditButton = styled(Button)`
   &:hover {
     background: #b0921a;
