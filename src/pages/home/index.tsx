@@ -19,6 +19,7 @@ import {
   InputButton,
   ContentWrap,
   SearchIcon,
+  HomeButton,
 } from './styles';
 
 const Home: React.FC = () => {
@@ -69,11 +70,11 @@ const Home: React.FC = () => {
       <Container>
         <ContainerContent>
           <TopContent onSubmit={handleSearchUser} data-testid="topContent">
-            <Button onClick={handleAllUsers}>Todos</Button>
+            <HomeButton onClick={handleAllUsers}>Todos</HomeButton>
             <InputContainer>
               <Input
                 data-testid="searchInput"
-                placeholder="Pesquise por CPF"
+                placeholder="CPF (ex: 11122233344)"
                 onChange={(e) => {
                   setSearchValue(e.target.value);
                 }}

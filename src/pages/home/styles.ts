@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { ImSearch } from 'react-icons/im';
+import { Button } from '../../components';
 
 export const Container = styled.div`
   @media screen and (max-width: 768px) {
@@ -22,6 +23,14 @@ export const TopContent = styled.div`
 
 export const InputContainer = styled.form``;
 
+export const HomeButton = styled(Button)`
+  width: 230px;
+
+  @media screen and (max-width: 768px) {
+    width: 180px;
+  }
+`;
+
 export const Input = styled.input`
   background: #f5f5f5;
   height: 56px;
@@ -31,11 +40,12 @@ export const Input = styled.input`
   border-bottom: 2px solid #00a0ef;
   border-right: none;
   padding: 0 10px;
-  width: 150px;
+  width: 200px;
   font-weight: 500;
   margin: 16px 0 16px 16px;
   transition: background-color 0.3s;
   @media screen and (max-width: 768px) {
+    width: 150px;
     font-size: 12px;
     font-weight: 400;
   }
