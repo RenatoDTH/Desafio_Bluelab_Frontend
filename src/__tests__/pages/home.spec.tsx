@@ -80,20 +80,20 @@ describe('Home', () => {
       },
     ]);
 
-    const { getByText, getByTestId } = render(
+    render(
       <BrowserRouter>
         <Home />
       </BrowserRouter>,
     );
 
     await waitFor(
-      () => expect(getByText('any_name any_lastname')).toBeTruthy(),
+      () => expect(screen.getByText('any_name any_lastname')).toBeTruthy(),
       {
         timeout: 2501,
       },
     );
 
-    const searchInput = getByTestId('searchInput') as HTMLInputElement;
+    const searchInput = screen.getByTestId('searchInput') as HTMLInputElement;
 
     await act(async () => {
       fireEvent.change(searchInput, {
@@ -106,7 +106,7 @@ describe('Home', () => {
     await waitFor(
       () =>
         act(async () => {
-          fireEvent.click(getByTestId('searchButton'));
+          fireEvent.click(screen.getByTestId('searchButton'));
         }),
       {
         timeout: 2550,
