@@ -2,13 +2,6 @@ import styled from 'styled-components';
 import { ImSearch } from 'react-icons/im';
 import { Button } from '../../components';
 
-export const Container = styled.div`
-  @media screen and (max-width: 768px) {
-    padding: 20px;
-    min-height: 100vh;
-  }
-`;
-
 export const TopContent = styled.div`
   display: flex;
   flex-direction: row;

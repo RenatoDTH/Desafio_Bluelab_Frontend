@@ -1,5 +1,5 @@
 import React from 'react';
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import AxiosMock from 'axios-mock-adapter';
 import { BrowserRouter } from 'react-router-dom';
 import api from '../../services/api';

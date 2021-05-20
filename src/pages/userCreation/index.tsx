@@ -2,15 +2,9 @@ import React, { useState, FormEvent, useCallback, useEffect } from 'react';
 import { validateCPF, validatePhone } from 'validations-br';
 import * as Yup from 'yup';
 import { toast } from 'react-toastify';
-import { ContainerContent, Header } from '../../components';
+import { ContainerContent, Header, MainContainer } from '../../components';
 
-import {
-  Container,
-  FormCreateUser,
-  Input,
-  ButtonSubmit,
-  Label,
-} from './styles';
+import { FormCreateUser, Input, ButtonSubmit, Label } from './styles';
 import { User } from '../../models';
 import api from '../../services/api';
 
@@ -87,7 +81,7 @@ const UserCreation: React.FC = () => {
   return (
     <>
       <Header />
-      <Container>
+      <MainContainer>
         <ContainerContent>
           <FormCreateUser data-testid="createForm" onSubmit={handleCreateUser}>
             <Label htmlFor="firstname">Nome</Label>
@@ -127,7 +121,7 @@ const UserCreation: React.FC = () => {
             </ButtonSubmit>
           </FormCreateUser>
         </ContainerContent>
-      </Container>
+      </MainContainer>
     </>
   );
 };

@@ -6,13 +6,13 @@ import {
   Header,
   UserItem,
   LoadAnimation,
+  MainContainer,
 } from '../../components';
 import { User } from '../../models';
 import api from '../../services/api';
 import { formatCpf, formatDate, formatPhone } from '../../utils';
 
 import {
-  Container,
   TopContent,
   Input,
   InputContainer,
@@ -85,7 +85,7 @@ const Home: React.FC = () => {
   return (
     <>
       <Header />
-      <Container>
+      <MainContainer>
         <ContainerContent>
           <TopContent onSubmit={handleSearchUser} data-testid="topContent">
             <HomeButton onClick={handleAllUsers}>Todos</HomeButton>
@@ -118,7 +118,7 @@ const Home: React.FC = () => {
             </ContentWrap>
           )}
         </ContainerContent>
-      </Container>
+      </MainContainer>
     </>
   );
 };
