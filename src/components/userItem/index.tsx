@@ -1,7 +1,8 @@
-import React, { FormEvent, useState } from 'react';
+import React, { FormEvent, useEffect, useState } from 'react';
 import { Modal } from 'react-responsive-modal';
 import { toast } from 'react-toastify';
 import { validatePhone } from 'validations-br';
+import * as Yup from 'yup';
 import { User } from '../../models';
 import 'react-responsive-modal/styles.css';
 
@@ -26,11 +27,18 @@ const UserItem: React.FC<UserItemProps> = ({ user }) => {
   const [open, setOpen] = useState(false);
   const [openEdit, setOpenEdit] = useState(false);
   const [newPhone, setNewPhone] = useState<string>('');
+  const [users, setUsers] = useState<User[]>([]);
 
   const handleOpenModal = () => setOpen(true);
   const handleCloseModal = () => setOpen(false);
   const handleOpenEditModal = () => setOpenEdit(true);
   const handleCloseEditModal = () => setOpenEdit(false);
+
+  useEffect(() => {
+    api.get('users').then((response) => {
+      setUsers(response.data);
+    });
+  }, []);
 
   const deleteItem = async (): Promise<void> => {
     try {
@@ -44,18 +52,38 @@ const UserItem: React.FC<UserItemProps> = ({ user }) => {
 
   const handleChangePhone = async (e: FormEvent) => {
     e.preventDefault();
-    const isValid = validatePhone(newPhone);
 
-    if (!isValid) {
-      throw toast.error('Telefone Inválido');
-    } else {
+    const schema = Yup.object().shape({
+      newPhone: Yup.string()
+        .min(10, 'Telefone só deve conter dígitos')
+        .max(11, 'Telefone só deve conter dígitos'),
+    });
+
+    try {
+      const isValid = validatePhone(newPhone);
+
+      if (!isValid) {
+        throw toast.error('Telefone Inválido');
+      }
+
+      await schema.validate({ newPhone }, { abortEarly: false });
+
+      const findUserByPhone = users.find((user) => user.phone === newPhone);
+      if (findUserByPhone) {
+        throw toast.error('Telefone já existente!');
+      }
+
       await api.put(`users/${user.id}`, {
         phone: newPhone,
       });
       toast.success('Telefone alterado com sucesso!');
-    }
 
-    setOpenEdit(false);
+      setNewPhone('');
+      setOpenEdit(false);
+    } catch (err) {
+      setNewPhone('');
+      throw toast.error(err.message);
+    }
   };
 
   return (
