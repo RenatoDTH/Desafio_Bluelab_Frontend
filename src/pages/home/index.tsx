@@ -1,7 +1,7 @@
 import React, { FormEvent, useCallback, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
+import * as Yup from 'yup';
 import {
-  Button,
   ContainerContent,
   Header,
   UserItem,
@@ -52,14 +52,27 @@ const Home: React.FC = () => {
       e.preventDefault();
       setAllUsers(false);
 
-      const userFound = await users.filter((user) => user.cpf === searchValue);
+      const schema = Yup.object().shape({
+        searchValue: Yup.string().length(11, 'CPF só deve conter dígitos'),
+      });
 
-      if (userFound.length === 0) {
-        throw toast.error('Informações de CPF não armazenadas.');
+      try {
+        await schema.validate({ searchValue }, { abortEarly: false });
+
+        const userFound = await users.filter(
+          (user) => user.cpf === searchValue,
+        );
+
+        if (userFound.length === 0) {
+          throw toast.error('Informações de CPF não armazenadas.');
+        }
+
+        setOneUser(userFound);
+        setSearchValue('');
+      } catch (err) {
+        setOneUser([]);
+        throw toast.error(err.message);
       }
-
-      setOneUser(userFound);
-      setSearchValue('');
     },
     [searchValue, users],
   );
